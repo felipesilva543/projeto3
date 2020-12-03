@@ -30,7 +30,7 @@ export default function Home() {
     }).then(response => {
       const lerolero = [...response.data];
       console.log(lerolero);
-      setChamadas(lerolero);
+      setChamadas(...lerolero);
       //console.log(response.data);
       ;
     })
