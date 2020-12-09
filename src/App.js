@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-//import Home from './Home';
+import 'fontsource-roboto';
+import Box from '@material-ui/core/Box';
 
 class App extends Component {
 
@@ -54,6 +54,7 @@ class App extends Component {
     ///////////////////////////////////////////////////////
     var dateCall = [];  // A data separada nos indices | 0 - Ano, 1 - Mes, 2 - Dia, 3 - Hora, 4 - Min, 5 - Segundos
     var now = new Date(); // Data atual | now.getDay() | now.getDate() | now.getMonth()+1 | now.getFullYear()
+    
     //                              | Dia da semana (0-6) | Dia Atual | Mes (0-11) | Ano Atual
     //**CREATE_DATA  = 2020, 10, 13, 13, 42, 54
     //               = AAAA, MM, DD, HH, MM, SS
@@ -118,24 +119,60 @@ class App extends Component {
 
   }
 
-  // 55 - 100
-  // 19 - x
-  // 
+
   render() {
     const { myObject, backLog, desDia, ofenSLA, resultDesDay } = this.state;
     var resAreaPercent = ((50 / (backLog === 0 ? 50 : backLog)) * 100).toFixed(0);
-    var resultDayPercent = ((100 * (resultDesDay === 0 ? 1 : resultDesDay)) / 55).toFixed(0);
+    var resultDayPercent = ((100 * resultDesDay) / desDia).toFixed(0);
     return (
       <div>
-        <ol type="1">
-          <li> Chamadas em Backlog: {backLog} </li>
-          <li> Ofensores de SLA: {ofenSLA} </li>
-          <li> Resultado da área: {resAreaPercent}% </li>
-          <li> Desafio do dia: {desDia} </li>
-          <li> Resultado do desafio de hoje: {resultDayPercent}%</li>
-          <li> Chamadas fechadas hoje: {resultDesDay} </li>
-        </ol>
+        <Box display="flex" justifyContent="center" m={0}>
+          <Box border={1} m={1} p={1}>
+            <center>
+              <h1>{backLog}</h1>
+              <h2>Chamadas em Backlog</h2>
+            </center>
+          </Box>
+          <Box border={1} m={1} p={1}>
+            <center>
+              <h1>{ofenSLA}</h1>
+              <h2>Ofensores de SLA</h2>
+            </center>
+          </Box>
+          <Box border={1} m={1} p={1}>
+            <center>
+              <h1>{resAreaPercent}</h1>
+              <h2>Resultado da área</h2>
+            </center>
+          </Box>
+        </Box>
+
+        <Box display="flex" justifyContent="center" m={0}>
+          <Box border={1} m={1} p={1}>
+            <center>
+              <h1>{desDia}</h1>
+              <h2>Desafio do Dia</h2>
+            </center>
+          </Box>
+          <Box border={1} m={1} p={1}>
+            <center>
+              <h1>{resultDayPercent}</h1>
+              <h2>Resultado do desafio de hoje</h2>
+            </center>
+          </Box>
+          <Box border={1} m={1} p={1}>
+            <center>
+              <h1>{resultDesDay}</h1>
+              <h2>Chamadas fechadas hoje</h2>
+            </center>
+          </Box>
+        </Box>
+
+
+
+
       </div>
+
     );
   }
 }
@@ -160,14 +197,17 @@ export default App;
  */
 
 /**
-      <ol type="1">
-       <li> Chamadas em Backlog: {backLog} </li>
-       <li> Ofensores de SLA: {ofenSLA} </li>
-       <li> Resultado da área: {resArea}% </li>
-       <li> Desafio do dia: {desDia} </li>
-       <li>  </li>
-       <li>  </li>
-       </ol>
+ *
+    <div>
+        <ol type="1">
+          <li> Chamadas em Backlog: {backLog} </li>
+          <li> Ofensores de SLA: {ofenSLA} </li>
+          <li> Resultado da área: {resAreaPercent}% </li>
+          <li> Desafio do dia: {desDia} </li>
+          <li> Resultado do desafio de hoje: {resultDayPercent}%</li>
+          <li> Chamadas fechadas hoje: {resultDesDay} </li>
+        </ol>
+      </div>
 
        <ol type="1">
           {myObject.map(item => (
