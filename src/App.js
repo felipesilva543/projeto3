@@ -54,7 +54,7 @@ class App extends Component {
     ///////////////////////////////////////////////////////
     var dateCall = [];  // A data separada nos indices | 0 - Ano, 1 - Mes, 2 - Dia, 3 - Hora, 4 - Min, 5 - Segundos
     var now = new Date(); // Data atual | now.getDay() | now.getDate() | now.getMonth()+1 | now.getFullYear()
-    
+
     //                              | Dia da semana (0-6) | Dia Atual | Mes (0-11) | Ano Atual
     //**CREATE_DATA  = 2020, 10, 13, 13, 42, 54
     //               = AAAA, MM, DD, HH, MM, SS
@@ -115,11 +115,8 @@ class App extends Component {
     })
     // Setando valor de backlog
     this.setState({ resultDesDay: resultDay });
-
-
   }
-
-
+  
   render() {
     const { myObject, backLog, desDia, ofenSLA, resultDesDay } = this.state;
     var resAreaPercent = ((50 / (backLog === 0 ? 50 : backLog)) * 100).toFixed(0);
@@ -167,10 +164,6 @@ class App extends Component {
             </center>
           </Box>
         </Box>
-
-
-
-
       </div>
 
     );
