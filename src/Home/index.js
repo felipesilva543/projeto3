@@ -1,70 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-//import gson from 'gson';
+
 export default function Home() {
-  const [chamadas, setChamadas] = useState('');
+  const [lero, setlero] = useState('');
+  const [myObject, setMyObject, Component] = useState(["Um", "2", "Três", "4"]);
+  //var myObject;"
+  async function callPost() {
 
-  var myObj;
-  const [teste, setTeste] = useState('[{"id": 510725, "status_category": "Concluído", "create_date": "datetime.datetime(2020, 10, 1, 5, 0, 53, tzinfo=psycopg2.tz.FixedOffsetTimezone(offset=0, name=None))"}]');
-  //const stExe = "Teste 45645";
-  //const [result, setResult] = useState('');
-
- /* async function callPostFetch() {
-    // Pra testar o retorno 
-    await fetch('atendiment', {
+    await axios({
       method: 'post',
-      headers: { "Content-Type": "application/json" },
-      body: {
-        "fields": ["status_category", "create_date", "resolution_date"],
+      headers: { 'Content-Type': 'application/json' },
+      url: 'atendiment',
+      bady: 'json',
+      data: {
+        "fields": ["id", "status_category", "create_date", "resolution_date"],
         "start_date": "2020-10-01T03:00:00.000+0000",
-        "end_date": "2020-10-01T09:59:59.000+0000"
-      }
+        "end_date": "2020-10-30T02:59:59.000+0000"
+      },
     }).then(function (response) {
-      console.log(response);
+
+      const regExp = /'|datetime\.datetime\(|, tzinfo=psycopg2\.tz\.FixedOffsetTimezone\(offset=0, name=None\)\)/gi;
+      setlero(response.data.replace(regExp, '"'));
+      //setlero(lero.replace(/None/gi, "\"None\""));
+      
+      //console.log(lero.match(/\{.+?\}/gi));
+      setMyObject(lero.match(/\{.+?\}/gi));
+      //myObject = JSON.parse(lero);
+      console.log(myObject);
+
     })
       .catch(function (error) {
         console.log(error);
       });
-  }*/
-   async function callPost() {
- 
-     await axios({
-       method: 'post',
-       headers: { 'Content-Type': 'application/json' },
-       url: 'atendiment',
-       bady: 'json',
-       data: {
-         "fields": ["id", "status_category", "create_date"],
-         "start_date": "2020-10-01T03:00:00.000+0000",
-         "end_date": "2020-10-01T09:59:59.000+0000"
-       },
-     }).then(function (response) {
-       console.log(typeof JSON.parse(teste));
-       //console.log(typeof {'test': 1});
-       
-       //setChamadas(response.data.replace(/[\']/g, /[\"]/g));
-       //setChamadas(response.data);
-       //console.log(typeof response.data);
-       // setResult(JSON.parse(response.data));
-       //console.log(result);
-       //console.log(typeof {"id": 510725, "status_category": "Concluído", "create_date": "datetime.datetime(2020, 10, 1, 5, 0, 53, tzinfo=psycopg2.tz.FixedOffsetTimezone(offset=0, name=None))"});
-      //myObg = response.data.replace(/[\']/g, '"');
-      //console.log(typeof myObj);
+  }
 
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-   }
-   //response.data.replace(/[\']/g, /[\"]/g)
+ 
   useEffect(() => {
-    //callPostFetch();
     callPost();
   }, []);
 
   return (
     <div>
-      {chamadas}
+      <h1>Teste 374</h1>
+      {myObject.map(item => (
+          <li>
+            <p>{item}</p>
+          </li>
+        ))}
     </div>
   );
 }
